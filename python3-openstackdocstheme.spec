@@ -1,7 +1,7 @@
 %global _empty_manifest_terminate_build 0
 Name:           python-openstackdocstheme
 Version:        2.2.7
-Release:        1
+Release:        2
 Summary:        OpenStack Docs Theme
 License:        Apache-2.0
 URL:            https://docs.openstack.org/openstackdocstheme/latest/
@@ -19,9 +19,10 @@ BuildRequires:  python3-setuptools
 BuildRequires:  python3-pbr
 BuildRequires:  python3-pip
 BuildRequires:  python3-wheel
+BuildRequires:  python3-pre-commit
 
 Requires:       python3-dulwich
-Requires:       pre-commit
+Requires:       python3-pre-commit
 Requires:       python3-pbr
 
 %description -n python3-openstackdocstheme
@@ -34,7 +35,7 @@ Provides:       python3-openstackdocstheme-doc
 Theme and extension support for Sphinx documentation that is published by Open Infrastructure Foundation projects.
 
 %prep
-%autosetup -n openstackdocstheme-2.2.7 
+%autosetup -n openstackdocstheme-%{version}
 
 %build
 %py3_build
@@ -78,6 +79,8 @@ mv %{buildroot}/doclist.lst .
 %{_docdir}/*
 
 %changelog
+* Mon Aug 2 2021 huangtianhua <huangtianhua@huawei.com> - 2.2.7-2
+- Fix pre-commit requires
 * Tue Jul 27 2021 OpenStack_SIG <openstack@openeuler.org> - 2.2.7-1
 - update to 2.2.7
 
