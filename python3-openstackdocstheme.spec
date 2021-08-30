@@ -1,15 +1,12 @@
 %global _empty_manifest_terminate_build 0
 Name:		python-openstackdocstheme
 Version:	2.2.6
-Release:	1
+Release:	2
 Summary:	OpenStack Docs Theme
 License:	Apache-2.0
 URL:		https://docs.openstack.org/openstackdocstheme/latest/
 Source0:	https://files.pythonhosted.org/packages/fc/41/024963ee03015130ef7d4514f526c921da559d65f9c41f7f416891cfae2e/openstackdocstheme-2.2.6.tar.gz
 BuildArch:	noarch
-
-Requires:	python3-dulwich
-Requires:	python3-pbr
 
 %description
 Theme and extension support for Sphinx documentation that is published by Open Infrastructure Foundation projects.
@@ -19,6 +16,10 @@ Summary:	OpenStack Docs Theme
 Provides:	python-openstackdocstheme
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
+BuildRequires:	python3-pbr
+Requires:	python3-dulwich
+Requires:	python3-pbr
+
 %description -n python3-openstackdocstheme
 
 
@@ -69,5 +70,7 @@ mv %{buildroot}/doclist.lst .
 %{_docdir}/*
 
 %changelog
+* Mon Aug 30 2021 huangtianhua <huangtianhua@huawei.com>
+- Adds python3-pbr as BuildRequires
 * Fri Nov 20 2020 Python_Bot <Python_Bot@openeuler.org>
 - Package Spec generated
