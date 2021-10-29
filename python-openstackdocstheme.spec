@@ -1,11 +1,11 @@
 %global _empty_manifest_terminate_build 0
 Name:           python-openstackdocstheme
-Version:        2.2.7
-Release:        2
+Version:        1.31.1
+Release:        1
 Summary:        OpenStack Docs Theme
 License:        Apache-2.0
 URL:            https://docs.openstack.org/openstackdocstheme/latest/
-Source0:        https://files.pythonhosted.org/packages/65/30/34188c7e64aee466c387db0333ee80df7b9db0b4f451c8453a1e3ca9fcd8/openstackdocstheme-2.2.7.tar.gz
+Source0:        https://files.pythonhosted.org/packages/ae/4b/db8a21af2f5db62fb719bac9270e62a7c787048bbd896061ccb36d8f81bc/openstackdocstheme-1.31.1.tar.gz
 BuildArch:      noarch
 %description
 Theme and extension support for Sphinx documentation that is published by Open Infrastructure Foundation projects.
@@ -13,20 +13,19 @@ Theme and extension support for Sphinx documentation that is published by Open I
 %package -n python3-openstackdocstheme
 Summary:        OpenStack Docs Theme
 Provides:       python-openstackdocstheme
-
+# Base build requires
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-pbr
 BuildRequires:  python3-pip
 BuildRequires:  python3-wheel
-BuildRequires:  python3-pre-commit
-
-Requires:       python3-dulwich
-Requires:       python3-pre-commit
+# General requires
+BuildRequires:  python3-dulwich
+# General requires
 Requires:       python3-pbr
-
+Requires:       python3-dulwich
 %description -n python3-openstackdocstheme
- Theme and extension support for Sphinx documentation that is published by Open Infrastructure Foundation projects.
+Theme and extension support for Sphinx documentation that is published by Open Infrastructure Foundation projects.
 
 %package help
 Summary:        OpenStack Docs Theme
@@ -69,16 +68,19 @@ popd
 mv %{buildroot}/filelist.lst .
 mv %{buildroot}/doclist.lst .
 
-
+%check
+%{__python3} setup.py test
 
 %files -n python3-openstackdocstheme -f filelist.lst
-
 %dir %{python3_sitelib}/*
 
 %files help -f doclist.lst
 %{_docdir}/*
 
 %changelog
+* Fri Oct 29 2021 OpenStack_SIG <openstack@openeuler.org> - 1.31.1-1
+- Downgrade package python3-openstackdocstheme to version 1.31.1
+
 * Mon Aug 2 2021 huangtianhua <huangtianhua@huawei.com> - 2.2.7-2
 - Fix pre-commit requires
 * Tue Jul 27 2021 OpenStack_SIG <openstack@openeuler.org> - 2.2.7-1
