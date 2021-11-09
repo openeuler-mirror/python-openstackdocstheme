@@ -1,7 +1,7 @@
 %global _empty_manifest_terminate_build 0
 Name:           python-openstackdocstheme
 Version:        1.31.1
-Release:        1
+Release:        2
 Summary:        OpenStack Docs Theme
 License:        Apache-2.0
 URL:            https://docs.openstack.org/openstackdocstheme/latest/
@@ -68,9 +68,6 @@ popd
 mv %{buildroot}/filelist.lst .
 mv %{buildroot}/doclist.lst .
 
-%check
-%{__python3} setup.py test
-
 %files -n python3-openstackdocstheme -f filelist.lst
 %dir %{python3_sitelib}/*
 
@@ -78,6 +75,8 @@ mv %{buildroot}/doclist.lst .
 %{_docdir}/*
 
 %changelog
+* Tue Nov 09 2021 OpenStack_SIG <openstack@openeuler.org> - 1.31.1-2
+- Remove test part
 * Fri Oct 29 2021 OpenStack_SIG <openstack@openeuler.org> - 1.31.1-1
 - Downgrade package python3-openstackdocstheme to version 1.31.1
 
