@@ -1,7 +1,7 @@
 %global _empty_manifest_terminate_build 0
 Name:		python-openstackdocstheme
 Version:	1.20.1
-Release:	1
+Release:	2
 Summary:	OpenStack Docs Theme
 License:	Apache-2.0, CC-BY-3.0
 URL:		https://docs.openstack.org/openstackdocstheme/latest/
@@ -16,9 +16,11 @@ Requires:	python2-dulwich
 
 %package -n python2-openstackdocstheme
 Summary:	OpenStack Docs Theme
-Provides:	python-openstackdocstheme
+Provides:	python2-openstackdocstheme
 BuildRequires:	python2-devel
 BuildRequires:	python2-setuptools
+BuildRequires:	python2-pbr
+
 %description -n python2-openstackdocstheme
 
 
@@ -69,5 +71,8 @@ mv %{buildroot}/doclist.lst .
 %{_docdir}/*
 
 %changelog
+* Tue Nov 23 huangtianhua <huangtianhua@huawei.com> - 1.20.1-2
+- Adds python2-pbr as BuildRequires and correct provides
+
 * Mon May 10 2021 Python_Bot <Python_Bot@openeuler.org>
 - Package Spec generated
