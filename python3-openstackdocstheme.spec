@@ -1,11 +1,11 @@
 %global _empty_manifest_terminate_build 0
 Name:           python-openstackdocstheme
-Version:        2.2.7
-Release:        2
+Version:        2.4.0
+Release:        1
 Summary:        OpenStack Docs Theme
 License:        Apache-2.0
 URL:            https://docs.openstack.org/openstackdocstheme/latest/
-Source0:        https://files.pythonhosted.org/packages/65/30/34188c7e64aee466c387db0333ee80df7b9db0b4f451c8453a1e3ca9fcd8/openstackdocstheme-2.2.7.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/o/openstackdocstheme/openstackdocstheme-2.4.0.tar.gz
 BuildArch:      noarch
 %description
 Theme and extension support for Sphinx documentation that is published by Open Infrastructure Foundation projects.
@@ -20,6 +20,9 @@ BuildRequires:  python3-pbr
 BuildRequires:  python3-pip
 BuildRequires:  python3-wheel
 BuildRequires:  python3-pre-commit
+BuildRequires:  python3-sphinx
+BuildRequires:  python3-dulwich
+BuildRequires:  git
 
 Requires:       python3-dulwich
 Requires:       python3-pre-commit
@@ -35,10 +38,17 @@ Provides:       python3-openstackdocstheme-doc
 Theme and extension support for Sphinx documentation that is published by Open Infrastructure Foundation projects.
 
 %prep
-%autosetup -n openstackdocstheme-%{version}
+%autosetup -n openstackdocstheme-%{version} -S git
 
 %build
+# Prevent doc build warnings from causing a build failure
+sed -i '/warning-is-error/d' setup.cfg
 %py3_build
+export PYTHONPATH=.
+sphinx-build -b html doc/source doc/build/html
+# remove the sphinx-build leftovers
+rm -rf html/.{doctrees,buildinfo}
+
 
 %install
 %py3_install
@@ -79,6 +89,9 @@ mv %{buildroot}/doclist.lst .
 %{_docdir}/*
 
 %changelog
+* Tue May 17 2022 lvxiaoqian <xiaoqian@nj.iscas.ac.cn> - 2.4.0-1
+- update to 2.4.0
+
 * Mon Aug 2 2021 huangtianhua <huangtianhua@huawei.com> - 2.2.7-2
 - Fix pre-commit requires
 * Tue Jul 27 2021 OpenStack_SIG <openstack@openeuler.org> - 2.2.7-1
